@@ -113,6 +113,7 @@
 </template>
 
 <script lang="js">
+
 export default {
   name: 'RegisterForm',
   data() {
@@ -137,17 +138,25 @@ export default {
     };
   },
   methods: {
-    register(values) {
+    async register(values) {
       this.reg_in_submission = true;
       this.reg_show_alert = true;
       this.reg_alert_varient = 'bg-blue-500';
       this.reg_alert_msg = 'Please wait! You acoount is being created';
 
+      try {
+        await this.$store.dispatch('register', values);
+      } catch (e) {
+        this.reg_in_submission = false;
+        this.reg_alert_varient = 'bg-red-500';
+        this.reg_alert_msg = 'An unexpected error occured! Try again later';
+        return;
+      }
+
       this.reg_alert_varient = 'bg-green-500';
       this.reg_alert_msg = 'Success! Your acoount has been created';
-      console.log(values);
+      window.location.reload();
     },
-
   },
 };
 </script>
