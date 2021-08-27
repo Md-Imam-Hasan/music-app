@@ -179,3 +179,20 @@
     </div>
   </section>
 </template>
+
+<script lang="js">
+// import store from '@/store';
+
+export default {
+  name: 'Manage',
+
+  // local navigation guard
+  // beforeRouteEnter(to, from, next) {
+  //   if (store.state.userLoggedIn) {
+  //     next();
+  //   } else {
+  //     next({ name: 'Home' });
+  //   }
+  // },
+};
+</script>
