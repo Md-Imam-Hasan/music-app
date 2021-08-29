@@ -1,6 +1,22 @@
 import { initializeApp } from 'firebase/app';
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { doc, getFirestore, setDoc } from 'firebase/firestore';
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  // eslint-disable-next-line comma-dangle
+  signInWithEmailAndPassword
+} from 'firebase/auth';
+import {
+  addDoc,
+  collection, deleteDoc, doc, getDoc, getDocs, getFirestore, query,
+  // eslint-disable-next-line comma-dangle
+  setDoc, updateDoc, where
+} from 'firebase/firestore';
+import {
+  deleteObject, getDownloadURL,
+  getStorage, ref,
+  // eslint-disable-next-line comma-dangle
+  uploadBytesResumable
+} from 'firebase/storage';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -13,16 +29,27 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-initializeApp(firebaseConfig);
+const firebaseApp = initializeApp(firebaseConfig);
 
 const db = getFirestore();
 const auth = getAuth();
 
+const storage = getStorage(firebaseApp);
+
 export {
   db,
   doc,
+  ref,
   setDoc,
   auth,
+  getDoc,
+  storage, query, where, getDocs, updateDoc,
+  deleteDoc,
+  deleteObject,
+  addDoc,
+  collection,
+  uploadBytesResumable,
+  getDownloadURL,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
 };
