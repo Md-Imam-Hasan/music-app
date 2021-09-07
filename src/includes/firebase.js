@@ -7,12 +7,24 @@ import {
 } from 'firebase/auth';
 import {
   addDoc,
-  collection, deleteDoc, doc, getDoc, getDocs, getFirestore, query,
+  collection,
+  deleteDoc,
+  doc,
+  getDoc,
+  getDocs,
+  getFirestore,
+  limit,
+  orderBy,
+  query,
+  setDoc,
+  startAfter,
+  updateDoc,
   // eslint-disable-next-line comma-dangle
-  setDoc, updateDoc, where
+  where
 } from 'firebase/firestore';
 import {
-  deleteObject, getDownloadURL,
+  deleteObject,
+  getDownloadURL,
   getStorage, ref,
   // eslint-disable-next-line comma-dangle
   uploadBytesResumable
@@ -43,7 +55,14 @@ export {
   setDoc,
   auth,
   getDoc,
-  storage, query, where, getDocs, updateDoc,
+  orderBy,
+  limit,
+  startAfter,
+  storage,
+  query,
+  where,
+  getDocs,
+  updateDoc,
   deleteDoc,
   deleteObject,
   addDoc,
