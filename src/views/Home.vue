@@ -71,20 +71,20 @@ export default {
     };
   },
   async created() {
-    this.getSongs();
+    await this.getSongs();
     window.addEventListener('scroll', this.handleScroll);
   },
   beforeUnmount() {
     window.removeEventListener('scroll', this.handleScroll);
   },
   methods: {
-    handleScroll() {
+    async handleScroll() {
       const { scrollTop, offsetHeight } = document.documentElement;
       const { innerHeight } = window;
-      const bottomOfWindow = (Math.round(scrollTop) + innerHeight) === offsetHeight;
+      const bottomOfWindow = (Math.ceil(scrollTop) + 5 + innerHeight) >= offsetHeight;
 
       if (bottomOfWindow) {
-        this.getSongs();
+        await this.getSongs();
       }
     },
     async getSongs() {
