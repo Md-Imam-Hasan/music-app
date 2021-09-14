@@ -37,6 +37,13 @@
             </li>
           </template>
         </ul>
+        <ul class="flex flex-row mt-1 ml-auto">
+          <li class="px-2 text-white">
+            <a href="#" @click.prevent="changeLocal">
+              {{ currentLocal }}
+            </a>
+          </li>
+        </ul>
       </div>
     </nav>
   </header>
@@ -49,6 +56,9 @@ export default {
   name: 'Header',
   computed: {
     ...mapState(['userLoggedIn']),
+    currentLocal() {
+      return this.$i18n.locale === 'fr' ? 'French' : 'English';
+    },
   },
   methods: {
     ...mapMutations(['toggleAuthModal']),
@@ -62,6 +72,9 @@ export default {
     // toggleAuthModalShow() {
     //   this.$store.commit('toggleAuthModal');
     // },
+    changeLocal() {
+      this.$i18n.locale = this.$i18n.locale === 'fr' ? 'en' : 'fr';
+    },
   },
 };
 </script>

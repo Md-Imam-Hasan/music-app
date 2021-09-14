@@ -90,6 +90,18 @@ export default {
           return;
         }
 
+        if (!navigator.onLine) {
+          this.uploads.push({
+            uploadTask: {},
+            current_progress: 100,
+            name: file.name,
+            varient: 'bg-red-400',
+            icon: 'fas fa-times',
+            text_color: 'text-red-400',
+          });
+          return;
+        }
+
         const storageRef = ref(storage, `songs/${file.name}`);
         const uploadTask = uploadBytesResumable(storageRef, file);
 

@@ -10,4 +10,11 @@ module.exports = {
       fullInstall: true,
     },
   },
+  pwa: {
+    name: 'Music App',
+    themeColor: '#ff5e3a',
+    menifestOptions: {
+      short_name: 'Music',
+    },
+  },
 };

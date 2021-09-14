@@ -9,8 +9,7 @@ import {
   addDoc,
   collection,
   deleteDoc,
-  doc,
-  getDoc,
+  doc, enableIndexedDbPersistence, getDoc,
   getDocs,
   getFirestore,
   limit,
@@ -45,6 +44,10 @@ const firebaseApp = initializeApp(firebaseConfig);
 
 const db = getFirestore();
 const auth = getAuth();
+enableIndexedDbPersistence(db)
+  .catch((err) => {
+    console.log(`Firebase persistence error ${err.code}`);
+  });
 
 const storage = getStorage(firebaseApp);
 
