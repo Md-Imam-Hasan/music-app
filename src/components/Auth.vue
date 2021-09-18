@@ -88,7 +88,9 @@ export default {
     };
   },
   computed: {
-    ...mapState(['authModalShow']),
+    ...mapState({
+      authModalShow: (state) => state.auth.authModalShow,
+    }),
   },
   methods: {
     ...mapMutations(['toggleAuthModal']),

@@ -125,7 +125,9 @@ export default {
     };
   },
   computed: {
-    ...mapState(['userLoggedIn']),
+    ...mapState({
+      userLoggedIn: (state) => state.auth.userLoggedIn,
+    }),
     sortedComments() {
       return this.comments.slice().sort((a, b) => {
         if (this.sort === '1') {
@@ -136,20 +138,24 @@ export default {
       });
     },
   },
-  async created() {
-    const docRef = doc(db, 'songs', this.$route.params.id);
+  async beforeRouteEnter(to, from, next) {
+    const docRef = doc(db, 'songs', to.params.id);
     const docSnap = await getDoc(docRef);
 
-    if (!docSnap.exists()) {
-      this.$router.push({ name: 'Home' });
-      return;
-    }
+    next((vm) => {
+      if (!docSnap.exists()) {
+        vm.$router.push({ name: 'Home' });
+        return;
+      }
 
-    const { sort } = this.$route.query;
-    this.sort = sort === '1' || sort === '2' ? sort : '1';
+      const { sort } = vm.$route.query;
+      // eslint-disable-next-line no-param-reassign
+      vm.sort = sort === '1' || sort === '2' ? sort : '1';
 
-    this.song = docSnap.data();
-    this.getComments();
+      // eslint-disable-next-line no-param-reassign
+      vm.song = docSnap.data();
+      vm.getComments();
+    });
   },
   methods: {
     ...mapActions(['newSong']),

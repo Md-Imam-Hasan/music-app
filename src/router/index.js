@@ -1,9 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import store from '../store';
-import About from '../views/About.vue';
-import Home from '../views/Home.vue';
-import Manage from '../views/Manage.vue';
-import Song from '../views/Song.vue';
+
+const Home = () => import('../views/Home.vue');
+const About = () => import('../views/About.vue');
+const Manage = () => import(/* webpackChunkName: "groupedChunk" */'../views/Manage.vue');
+const Song = () => import(/* webpackChunkName: "groupedChunk" */'../views/Song.vue');
 
 const routes = [
   {
@@ -30,8 +31,8 @@ const routes = [
     redirect: { name: 'Manage' },
   },
   {
-    name: 'Song',
     path: '/song/:id',
+    name: 'Song',
     component: Song,
   },
   {
@@ -52,7 +53,7 @@ router.beforeEach((to, from, next) => {
     return;
   }
 
-  if (store.state.userLoggedIn) {
+  if (store.state.auth.userLoggedIn) {
     next();
   } else {
     next({ name: 'Home' });

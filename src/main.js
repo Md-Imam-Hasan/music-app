@@ -1,3 +1,4 @@
+import 'nprogress/nprogress.css';
 import { createApp } from 'vue';
 import App from './App.vue';
 import './assets/main.css';
@@ -5,11 +6,14 @@ import './assets/tailwind.css';
 import Icon from './directives/icon';
 import { auth } from './includes/firebase';
 import i18n from './includes/i18n';
+import ProgressBar from './includes/progress-bar';
 import VeeValidaionPlugin from './includes/validation';
 import GlobalComponents from './includes/_globals';
 import './registerServiceWorker';
 import router from './router';
 import store from './store';
+
+ProgressBar(router);
 
 let app;
 auth.onAuthStateChanged(() => {
